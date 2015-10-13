@@ -7,9 +7,11 @@
 
 #import <EstimoteSDK/EstimoteSDK.h>
 
-// 2. Add the ESTBeaconManagerDelegate protocol
+#import <Parse/Parse.h>
+
+// Add the ESTBeaconManagerDelegate protocol
 @interface AppDelegate () <ESTBeaconManagerDelegate>
-// 3. Add a property to hold the beacon manager
+// Add a property to hold the beacon manager
 @property (nonatomic) ESTBeaconManager *beaconManager;
 
 @end
@@ -17,12 +19,23 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [ESTConfig setupAppID:@"proximity-content-for-mult-k9c" andAppToken:@"d1763d2fdf4a3a29efa3b9cb3c64007c"];
+        [ESTConfig setupAppID:@"proximity-content-for-mult-k9c" andAppToken:@"d1763d2fdf4a3a29efa3b9cb3c64007c"];
+
     
-        // 4. Instantiate the beacon manager & set its delegate
+        // Instantiate the beacon manager & set its delegate
         self.beaconManager = [ESTBeaconManager new];
         self.beaconManager.delegate = self;
         [self.beaconManager requestAlwaysAuthorization];
+    
+        // [Optional] Power your app with Local Datastore. For more info, go to
+        [Parse enableLocalDatastore];
+    
+        // Initialize Parse.
+        [Parse setApplicationId:@"bJcab8am3wFepDs3O2M9MgKHguzwS0gcHERlPqHV"
+                  clientKey:@"GtiUtaSy1oVdmM5gzQVpUV8CumsrgUNP85oCYCYH"];
+    
+        // [Optional] Track statistics around application opens.
+        [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
  
     return YES;
 }

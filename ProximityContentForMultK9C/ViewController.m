@@ -23,8 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
 
     [self.activityIndicator startAnimating];
+    
+    
 
     self.proximityContentManager = [[ProximityContentManager alloc]
         initWithBeaconIDs:@[
